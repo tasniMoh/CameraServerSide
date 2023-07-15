@@ -10,6 +10,8 @@ using System.Threading;
 ServerCall();
 
 
+Task.Delay(1000).Wait();
+
 NamedPipeClientStream client = new NamedPipeClientStream("show");
 client.Connect();
 
@@ -37,7 +39,8 @@ while (true)
 
 void ServerCall()
 {
-
+  Task.Factory.StartNew(() =>
+    {
     
         Console.WriteLine("Camera Server");
 
@@ -88,7 +91,7 @@ void ServerCall()
 
 
         }
-    
+    });
 }
 
 
